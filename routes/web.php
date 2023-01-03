@@ -18,24 +18,27 @@ use Illuminate\Http\Request;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::group(['middleware' => ['auth']], function () {
 
-Route::post('/publishes/preview',[PublishController::class, 'preview'])->name('publishes.preview');
-Route::resource('publishes', PublishController::class);
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::resource('resumes', ResumeController::class);
+    Route::post('/publishes/preview', [PublishController::class, 'preview'])->name('publishes.preview');
+    Route::resource('publishes', PublishController::class);
 
-Route::prefix('/tokens')->middleware('auth')->name('tokens.')->group(function() {
-    Route::get('/create', fn() => view('tokens/create'))->name('create');
+    Route::resource('resumes', ResumeController::class);
 
-    Route::post('/', function (Request $request) {
-        $token = $request->user()->createToken($request->token_name);
-    
-        return ['token' => $token->plainTextToken];
-    })->name('store');
+    Route::prefix('/tokens')->middleware('auth')->name('tokens.')->group(function () {
+        Route::get('/create', fn () => view('tokens/create'))->name('create');
+
+        Route::post('/', function (Request $request) {
+            $token = $request->user()->createToken($request->token_name);
+
+            return ['token' => $token->plainTextToken];
+        })->name('store');
+    });
 });
