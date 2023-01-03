@@ -25,6 +25,8 @@ Auth::routes();
 
 Route::group(['middleware' => ['auth']], function () {
 
+    Route::get('/configs', [App\Http\Controllers\ConfigController::class, 'index'])->name('configs');
+
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
     Route::post('/publishes/preview', [PublishController::class, 'preview'])->name('publishes.preview');
