@@ -23,9 +23,9 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::group(['middleware' => ['auth']], function () {
+Route::get('/configs', [App\Http\Controllers\ConfigController::class, 'index'])->name('configs');
 
-    Route::get('/configs', [App\Http\Controllers\ConfigController::class, 'index'])->name('configs');
+Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
