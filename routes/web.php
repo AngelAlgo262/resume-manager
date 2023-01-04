@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ConfigController;
 use App\Http\Controllers\PublishController;
 use App\Http\Controllers\ResumeController;
 use Illuminate\Support\Facades\Route;
@@ -24,6 +25,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/configs', [App\Http\Controllers\ConfigController::class, 'index'])->name('configs');
+Route::post('/configs/create',[App\Http\Controllers\ConfigController::class, 'create'])->name('config.create');
+
 
 Route::group(['middleware' => ['auth']], function () {
 

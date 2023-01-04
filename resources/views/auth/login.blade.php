@@ -41,9 +41,7 @@
                                         </span>
                                     @enderror
                                 </div>
-                            </div>
-
-                           
+                            </div>                        
                             <div class="">
                                 <div class="">
                                     <div class="mt-3 btn-block">
