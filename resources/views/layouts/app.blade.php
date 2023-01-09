@@ -3,11 +3,16 @@
 
 <head>
     <meta charset="utf-8">
+    <meta name="author" content="Angel Ocampo" />
+    <meta
+      name="description"
+      content="Resume-Manager"
+    />
+    <meta name="keywords" content="Laravel, Vue" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     @routes
@@ -20,13 +25,14 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    {{-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> --}}
+    <link href="{{ asset('css/dark.css') }}" rel="stylesheet">
 </head>
 
 <body>
     <div id="app">
         @if (Auth::check())
-            <nav class="navbar navbar-expand-md navbar-light bg-white">
+            <nav class="navbar navbar-expand-md navbar-light">
                 <div class="container">
                     <button class="navbar-toggler" type="button" data-toggle="collapse"
                         data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
