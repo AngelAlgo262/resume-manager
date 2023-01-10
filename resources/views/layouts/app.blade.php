@@ -4,10 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="author" content="Angel Ocampo" />
-    <meta
-      name="description"
-      content="Resume-Manager"
-    />
+    <meta name="description" content="Resume-Manager" />
     <meta name="keywords" content="Laravel, Vue" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -25,8 +22,8 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
-    {{-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> --}}
-    <link href="{{ asset('css/dark.css') }}" rel="stylesheet">
+    <link id="claro" href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link id="dark" {{-- href="{{ asset('css/dark.css') }}" --}} rel="stylesheet">
 </head>
 
 <body>
@@ -72,47 +69,46 @@
 
                             <li>
                                 {{-- swith --}}
-                                <div class="ml-md-2 ml-1 custom-control custom-switch ">
-                                    <input type="checkbox" class="custom-control-input" id="opcion1">
-                                    <label class="custom-control-label" for="opcion1">
+                                    <div class="ml-md-2 ml-1 custom-control custom-switch ">
+                                        <input id="mood" type="checkbox" class="custom-control-input">
+                                        <label class="custom-control-label" for="mood"></label>
+                                    </div>
+                    </ul>
+                    <!-- Right Side Of Navbar -->
+                    <ul class="navbar-nav ml-auto">
+                        <!-- Authentication Links -->
+                        @guest
+                            @if (Route::has('login'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                </li>
+                            @endif
 
-                                    </label>
-                                </div>
-                        </ul>
-                        <!-- Right Side Of Navbar -->
-                        <ul class="navbar-nav ml-auto">
-                            <!-- Authentication Links -->
-                            @guest
-                                @if (Route::has('login'))
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                    </li>
-                                @endif
-
-                                @if (Route::has('register'))
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                    </li>
-                                @endif
-                            @else
+                            @if (Route::has('register'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                </li>
+                            @endif
+                        @else
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                  {{ Auth::user()->name }}
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ Auth::user()->name }}
                                 </a>
-                
+
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                  <a class="dropdown-item" href="{{ route('logout') }}"
-                                     onclick="event.preventDefault();
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
                                            document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
-                                  </a>
-                
-                                  <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                    @csrf
-                                  </form>
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
                                 </div>
                             </li>
-                                @endguest
+                        @endguest
         @endif
         </ul>
     </div>
@@ -131,6 +127,25 @@
         @yield('content')
     </main>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            let mood = document.getElementById('mood');
+            let body = document.getElementById('claro');
+            mood.addEventListener("click", function (){
+                if(this.checked){
+                    /*console.log('oscuro');
+                     body.removeAttribute('href') */
+                    body.setAttribute('href','css/dark.css')                  
+                }else {
+                    body.setAttribute('href','css/app.css')                  
+                }
+            })
+            
+                
+
+        })
+
+    </script>
 </body>
 
 </html>
